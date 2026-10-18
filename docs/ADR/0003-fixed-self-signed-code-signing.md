@@ -23,4 +23,7 @@
 - 再ビルドしても designated requirement（Bundle ID と証明書）が変わらないので、アクセシビリティと Keychain の許可が引き継がれる。
 - 証明書の秘密鍵はログインキーチェーンにある。これを盗めるのは、同じユーザー権限で動くマルウェア（守る範囲の外。[ADR-0001](0001-native-swift-instead-of-hammerspoon.md)）だけ。
 - 証明書を作り直すと、別のアプリと見なされる。その場合は許可の付け直しと、Keychain の鍵の ACL の更新が必要になる。
-- **未確認事項**: 自己署名証明書を `codesign` に使うには、コード署名用としての信頼設定（`security add-trusted-cert -p codeSign` 相当）が要るかもしれない。`make-cert.sh` を実装するときに確かめる。
+- **確認結果（2026-10-19）**:
+  - 証明書は `CSSMERR_TP_NOT_TRUSTED`（信頼されていない状態）のままでも `codesign` で署名できる。信頼の設定は不要。
+  - `security import -T /usr/bin/codesign` だけでは足りず、初回の署名でキーチェーンのダイアログが出る。ログインパスワードを入れて「常に許可」を押すと、以降はダイアログなしで署名できる。ダイアログに応答しないと `errSecInternalComponent` で失敗する。
+  - 署名後の designated requirement は `identifier "local.safeclipy.SafeClipy" and certificate leaf = H"<証明書のハッシュ>"` となり、再ビルドしても変わらない。

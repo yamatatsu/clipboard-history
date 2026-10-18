@@ -31,5 +31,8 @@
 
 - Xcode のない環境でも `./scripts/build.sh` だけでビルドできる。
 - アセットカタログ、Storyboard、Xcode のプレビューは使えない。UI はコード（AppKit）で組む。メニューバーのアイコンは SF Symbols を使う。
-- Command Line Tools で XCTest / swift-testing が使えない可能性がある。実装の最初に確認する（CLAUDE.md に記載）。
-- **未確認事項**: Command Line Tools だけで AppKit / CryptoKit / Carbon を使うコードがビルドできるかは、実装の最初に確かめる。
+- **確認結果（2026-10-16、Swift 6.3.3 の Command Line Tools）**:
+  - AppKit / CryptoKit / Carbon を使うコードは、Command Line Tools だけでビルドできる。
+  - XCTest は使えない（`no such module 'XCTest'`）。
+  - swift-testing は、フレームワークの検索パスと rpath を指定すれば使える。手順は `scripts/test.sh` にまとめた。
+- テストの対象にするため、UI に依存しないロジックは `SafeClipyCore` ライブラリのターゲットに分ける。

@@ -4,9 +4,9 @@
 
 ## Package.swift
 
-- `swift-tools-version` は、入っている Command Line Tools で使える版にする（実装するときに決める）。
+- `swift-tools-version:5.10`（Swift 6 の言語モードの厳しい並行性チェックを避けるため）。
 - `platforms: [.macOS(.v13)]`
-- executable target は `SafeClipy` の1つ。テストのターゲットは CLAUDE.md の「テスト」に従う。
+- ターゲットは、ライブラリの `SafeClipyCore`（UI に依存しないロジック）、実行ファイルの `SafeClipy`、テストの `SafeClipyCoreTests` の3つ。
 - `dependencies` は空にする。
 
 ## scripts/make-cert.sh
@@ -19,7 +19,7 @@
    - keyUsage: digitalSignature（critical）、extendedKeyUsage: codeSigning（critical）
    - 有効期限: 10年
 3. p12 にまとめて、`security import` でログインキーチェーンに入れる（`-T /usr/bin/codesign` を付ける）
-4. 必要なら、コード署名用として信頼する設定をする（ADR-0003 の未確認事項）
+4. 信頼の設定はしない（不要なことを確認済み。ADR-0003）
 5. 作業用のファイル（秘密鍵、p12）は `mktemp -d` で作った場所に置き、終わったら消す
 6. `security find-identity -p codesigning` で、使える状態になったか確かめる
 

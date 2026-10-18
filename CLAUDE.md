@@ -26,14 +26,19 @@ safe-clipy は、セキュリティを優先した macOS 用のクリップボ�
 ./scripts/make-cert.sh        # 自己署名証明書を作成（最初の1回）
 ./scripts/build.sh            # リリースビルド → build/SafeClipy.app を作って署名
 ./scripts/build.sh install    # 上に加えて ~/Applications へコピー
+./scripts/test.sh             # SafeClipyCore の単体テスト
 swift build                   # 開発中のコンパイル確認
 ```
+
+- 証明書を作った直後の初回の署名では、キーチェーンのダイアログが出る。利用者が「常に許可」を押す必要があるので、初回のビルドは利用者に `! ./scripts/build.sh` で実行してもらう。
 
 ## 構成
 
 ```
 Package.swift
-Sources/SafeClipy/        # アプリ本体（モジュール構成は docs/specs/ の各仕様を参照）
+Sources/SafeClipyCore/    # UI に依存しないロジック（テスト対象）
+Sources/SafeClipy/        # アプリ本体（AppKit、Keychain、ホットキーなど）
+Tests/SafeClipyCoreTests/ # swift-testing
 Resources/Info.plist      # LSUIElement=true（Dock に出さない）
 scripts/                  # make-cert.sh, build.sh
 docs/ADR/                 # 設計判断（番号つき、追記していく）
@@ -42,8 +47,10 @@ docs/specs/               # 機能仕様
 
 ## テスト
 
-- テストの対象は、UI に依存しない純粋なロジック（Filter、HistoryStore、暗号化して戻せること、スニペットの読み込み）に絞る。
-- Command Line Tools で XCTest / swift-testing が使えるかは **まだ確認していない**。実装の最初に確認し、結果をこのファイルに書く。使えなければ、テスト用の実行ターゲットを作って代わりにする。
+- テストの対象は、`SafeClipyCore` にある UI に依存しないロジック（ContentFilter、HistoryStore、HistoryCodec、SnippetLibrary、DisplayText）に絞る。
+- **XCTest は Command Line Tools では使えない。** swift-testing（`import Testing`）を使う。
+- `swift test` を直接実行すると `no such module 'Testing'` になる。必ず `./scripts/test.sh` を使う（フレームワークのパスを補っている）。
+- UI、Keychain、クリップボード、ホットキーは、実際にアプリを起動して手で確かめる。
 
 ## ドキュメントの運用
 
