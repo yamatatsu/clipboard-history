@@ -1,5 +1,5 @@
 import Foundation
-import SafeClipyCore
+import ClipboardHistoryCore
 
 /// snippets.json の読み込みと変更の監視（docs/specs/snippets.md）。
 @MainActor

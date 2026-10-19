@@ -1,6 +1,6 @@
 import CryptoKit
 import Foundation
-import SafeClipyCore
+import ClipboardHistoryCore
 
 /// history.enc の読み書き（docs/specs/storage-and-encryption.md）。
 final class HistoryPersistence {
@@ -20,7 +20,7 @@ final class HistoryPersistence {
 
     init() throws {
         directory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("SafeClipy", isDirectory: true)
+            .appendingPathComponent("ClipboardHistory", isDirectory: true)
         fileURL = directory.appendingPathComponent("history.enc")
         try Self.prepareDirectory(directory)
     }

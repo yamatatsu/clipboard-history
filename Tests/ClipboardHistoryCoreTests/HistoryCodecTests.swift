@@ -1,7 +1,7 @@
 import CryptoKit
 import Foundation
 import Testing
-@testable import SafeClipyCore
+@testable import ClipboardHistoryCore
 
 @Suite struct HistoryCodecTests {
     let key = SymmetricKey(size: .bits256)

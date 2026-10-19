@@ -1,5 +1,5 @@
 import AppKit
-import SafeClipyCore
+import ClipboardHistoryCore
 
 /// パネルに並べる1行。見出しは選べない。
 struct PickerEntry {

@@ -14,7 +14,7 @@ enum Notifier {
     static func post(_ body: String) {
         log.notice("notify: \(body, privacy: .public)")
         let content = UNMutableNotificationContent()
-        content.title = "SafeClipy"
+        content.title = "ClipboardHistory"
         content.body = body
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)

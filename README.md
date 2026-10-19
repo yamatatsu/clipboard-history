@@ -1,7 +1,13 @@
-# safe-clipy
+# clipboard-history
 
 [Clipy](https://github.com/Clipy/Clipy) と同じように使えて、セキュリティを優先した macOS 用のクリップボード履歴・スニペットアプリです。
 自分専用で配布はしません。Swift で書き、Xcode を使わずにビルドします。
+
+Clipy はとてもリスペクトしているアプリで、長いあいだ本当にお世話になりました。
+ただ、クリップボードには日々パスワードやトークンが流れていて、それを狙う攻撃も増えています。
+こういう時代なので、中身をすべて把握できる小さなアプリを自分で作るほうが安全だと判断しました。
+
+このリポジトリは、自分で使うためだけに作っています。配布は目的としていません。
 
 ## 特徴
 
@@ -33,16 +39,16 @@
 # 1. 署名用の自己署名証明書を作る（最初の1回だけ）
 ./scripts/make-cert.sh
 
-# 2. ビルドして ~/Applications/SafeClipy.app にインストールする
+# 2. ビルドして ~/Applications/ClipboardHistory.app にインストールする
 ./scripts/build.sh install
 
 # 3. 起動する
-open ~/Applications/SafeClipy.app
+open ~/Applications/ClipboardHistory.app
 ```
 
 証明書を作って最初に署名するときは、キーチェーンのダイアログが出ます。ログインパスワードを入力して **「常に許可」** を押してください。
 
-初めて起動したら、**システム設定 → プライバシーとセキュリティ → アクセシビリティ** で SafeClipy を許可してください（`⌘V` を送るのに必要です）。
+初めて起動したら、**システム設定 → プライバシーとセキュリティ → アクセシビリティ** で ClipboardHistory を許可してください（`⌘V` を送るのに必要です）。
 許可しない場合は、選んだ項目がクリップボードに入るだけで、貼り付けは自動で行われません。
 
 再ビルドしても同じ証明書で署名するので、アクセシビリティと Keychain の許可はそのまま引き継がれます（[ADR-0003](docs/ADR/0003-fixed-self-signed-code-signing.md) を参照）。
@@ -70,20 +76,24 @@ open ~/Applications/SafeClipy.app
 
 | パス | 内容 |
 |---|---|
-| `~/Library/Application Support/SafeClipy/history.enc` | 暗号化した履歴 |
-| `~/Library/Application Support/SafeClipy/snippets.json` | スニペット（**平文**。機密情報は入れないでください） |
-| ログインキーチェーンの `SafeClipy history key` | 履歴を暗号化する鍵 |
+| `~/Library/Application Support/ClipboardHistory/history.enc` | 暗号化した履歴 |
+| `~/Library/Application Support/ClipboardHistory/snippets.json` | スニペット（**平文**。機密情報は入れないでください） |
+| ログインキーチェーンの `ClipboardHistory history key` | 履歴を暗号化する鍵 |
 
 ## アンインストール
 
 ```sh
-rm -rf ~/Applications/SafeClipy.app ~/Library/"Application Support"/SafeClipy
-security delete-generic-password -s "SafeClipy history key"
+rm -rf ~/Applications/ClipboardHistory.app ~/Library/"Application Support"/ClipboardHistory
+security delete-generic-password -s "ClipboardHistory history key"
 ```
 
-最後に、アクセシビリティの許可一覧から SafeClipy を削除してください。
+最後に、アクセシビリティの許可一覧から ClipboardHistory を削除してください。
 
 ## ドキュメント
 
 - [docs/ADR/](docs/ADR/): 設計判断の記録
 - [docs/specs/](docs/specs/): 機能の仕様
+
+## ライセンス
+
+[MIT License](LICENSE)

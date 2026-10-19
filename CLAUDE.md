@@ -2,7 +2,7 @@
 
 ## プロジェクト概要
 
-safe-clipy は、セキュリティを優先した macOS 用のクリップボード履歴・スニペットアプリです（Clipy 互換の操作感）。
+clipboard-history は、セキュリティを優先した macOS 用のクリップボード履歴・スニペットアプリです（Clipy 互換の操作感）。
 自分専用で配布はしない。全体像は README.md、設計判断は docs/ADR/、仕様は docs/specs/ を参照する。
 
 ## 必ず守る制約
@@ -24,9 +24,9 @@ safe-clipy は、セキュリティを優先した macOS 用のクリップボ�
 
 ```sh
 ./scripts/make-cert.sh        # 自己署名証明書を作成（最初の1回）
-./scripts/build.sh            # リリースビルド → build/SafeClipy.app を作って署名
+./scripts/build.sh            # リリースビルド → build/ClipboardHistory.app を作って署名
 ./scripts/build.sh install    # 上に加えて ~/Applications へコピー
-./scripts/test.sh             # SafeClipyCore の単体テスト
+./scripts/test.sh             # ClipboardHistoryCore の単体テスト
 swift build                   # 開発中のコンパイル確認
 ```
 
@@ -36,18 +36,18 @@ swift build                   # 開発中のコンパイル確認
 
 ```
 Package.swift
-Sources/SafeClipyCore/    # UI に依存しないロジック（テスト対象）
-Sources/SafeClipy/        # アプリ本体（AppKit、Keychain、ホットキーなど）
-Tests/SafeClipyCoreTests/ # swift-testing
-Resources/Info.plist      # LSUIElement=true（Dock に出さない）
-scripts/                  # make-cert.sh, build.sh
-docs/ADR/                 # 設計判断（番号つき、追記していく）
-docs/specs/               # 機能仕様
+Sources/ClipboardHistoryCore/    # UI に依存しないロジック（テスト対象）
+Sources/ClipboardHistory/        # アプリ本体（AppKit、Keychain、ホットキーなど）
+Tests/ClipboardHistoryCoreTests/ # swift-testing
+Resources/Info.plist             # LSUIElement=true（Dock に出さない）
+scripts/                         # make-cert.sh, build.sh
+docs/ADR/                        # 設計判断（番号つき、追記していく）
+docs/specs/                      # 機能仕様
 ```
 
 ## テスト
 
-- テストの対象は、`SafeClipyCore` にある UI に依存しないロジック（ContentFilter、HistoryStore、HistoryCodec、SnippetLibrary、DisplayText）に絞る。
+- テストの対象は、`ClipboardHistoryCore` にある UI に依存しないロジック（ContentFilter、HistoryStore、HistoryCodec、SnippetLibrary、DisplayText）に絞る。
 - **XCTest は Command Line Tools では使えない。** swift-testing（`import Testing`）を使う。
 - `swift test` を直接実行すると `no such module 'Testing'` になる。必ず `./scripts/test.sh` を使う（フレームワークのパスを補っている）。
 - UI、Keychain、クリップボード、ホットキーは、実際にアプリを起動して手で確かめる。

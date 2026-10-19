@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>local.safeclipy.SafeClipy</string>
+	<string>local.clipboardhistory.ClipboardHistory</string>
 	<key>CFBundleName</key>
-	<string>SafeClipy</string>
+	<string>ClipboardHistory</string>
 	<key>CFBundleDisplayName</key>
-	<string>SafeClipy</string>
+	<string>ClipboardHistory</string>
 	<key>CFBundleExecutable</key>
-	<string>SafeClipy</string>
+	<string>ClipboardHistory</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

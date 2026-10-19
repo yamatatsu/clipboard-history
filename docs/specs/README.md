@@ -20,6 +20,6 @@
 | 選んだ後の動作 | Clipy と同じく、クリップボードに入れてすぐ貼り付ける |
 | 扱う種類 | テキストのみ |
 | 対応 OS | macOS 13 以降 |
-| Bundle ID | `local.safeclipy.SafeClipy` |
+| Bundle ID | `local.clipboardhistory.ClipboardHistory` |
 
 これらの値は、将来の設定画面で変えられるようにする余地を残しつつ、最初は定数として持つ。

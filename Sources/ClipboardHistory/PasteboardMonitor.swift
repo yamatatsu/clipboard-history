@@ -1,5 +1,5 @@
 import AppKit
-import SafeClipyCore
+import ClipboardHistoryCore
 
 /// changeCount を 0.5 秒ごとに確認する（docs/specs/clipboard-history.md）。
 @MainActor

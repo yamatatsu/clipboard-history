@@ -29,7 +29,7 @@ final class MenuBarController: NSObject, NSMenuDelegate {
 
     func updateIcon() {
         let name = actions.isPaused() ? "pause.circle" : "doc.on.clipboard"
-        let image = NSImage(systemSymbolName: name, accessibilityDescription: "SafeClipy")
+        let image = NSImage(systemSymbolName: name, accessibilityDescription: "ClipboardHistory")
         image?.isTemplate = true
         statusItem.button?.image = image
     }
@@ -53,7 +53,7 @@ final class MenuBarController: NSObject, NSMenuDelegate {
         loginItem.action = #selector(toggleLaunchAtLogin)
         menu.addItem(loginItem)
         menu.addItem(.separator())
-        let quit = NSMenuItem(title: "SafeClipy を終了", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "")
+        let quit = NSMenuItem(title: "ClipboardHistory を終了", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "")
         menu.addItem(quit)
         statusItem.menu = menu
     }

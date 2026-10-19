@@ -1,6 +1,6 @@
 import AppKit
 import Carbon
-import SafeClipyCore
+import ClipboardHistoryCore
 import ServiceManagement
 
 @MainActor
@@ -127,7 +127,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private static func fallbackDirectory() throws -> URL {
         let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("SafeClipy", isDirectory: true)
+            .appendingPathComponent("ClipboardHistory", isDirectory: true)
         try HistoryPersistence.prepareDirectory(url)
         return url
     }

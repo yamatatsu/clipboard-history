@@ -6,8 +6,8 @@
 
 | パス | パーミッション |
 |---|---|
-| `~/Library/Application Support/SafeClipy/` | 0700 |
-| `~/Library/Application Support/SafeClipy/history.enc` | 0600 |
+| `~/Library/Application Support/ClipboardHistory/` | 0700 |
+| `~/Library/Application Support/ClipboardHistory/history.enc` | 0600 |
 
 ## ファイルの形式
 
@@ -36,7 +36,7 @@ history.enc = magic(4バイト "SCH1") || AES.GCM.SealedBox.combined
 
 ## 鍵
 
-- ログインキーチェーンの generic password に置く。service は `SafeClipy history key`、account は `default`。
+- ログインキーチェーンの generic password に置く。service は `ClipboardHistory history key`、account は `default`。
 - 起動時の流れ:
   - 鍵がある → 読み込む
   - 鍵がなく、`history.enc` もない → 鍵を作って保存する

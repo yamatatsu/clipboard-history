@@ -4,7 +4,7 @@
 
 ## ファイル
 
-- パス: `~/Library/Application Support/SafeClipy/snippets.json`（パーミッション 0600）
+- パス: `~/Library/Application Support/ClipboardHistory/snippets.json`（パーミッション 0600）
 - ファイルがなければ、初回の起動時にサンプル入りで作る。
 - **平文** なので、機密情報は入れない。
 

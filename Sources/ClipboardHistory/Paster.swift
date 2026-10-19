@@ -1,7 +1,7 @@
 import AppKit
 import ApplicationServices
 import Carbon
-import SafeClipyCore
+import ClipboardHistoryCore
 
 /// 選んだテキストをクリップボードに入れて ⌘V を送る（docs/specs/ui-and-paste.md）。
 @MainActor

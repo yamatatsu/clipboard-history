@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import SafeClipyCore
+@testable import ClipboardHistoryCore
 
 @Suite struct SnippetLibraryTests {
     @Test func decodesSpecExample() throws {

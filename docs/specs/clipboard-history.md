@@ -4,7 +4,7 @@
 
 - `NSPasteboard.general.changeCount` を **0.5秒ごと** に確認する（macOS にはクリップボードの変更を通知する仕組みがないため）。
 - `changeCount` が変わっていたら、次の順に処理する。
-  1. 自分が書き込んだもの（独自の印 `local.safeclipy.marker` が付いている）なら無視する
+  1. 自分が書き込んだもの（独自の印 `local.clipboardhistory.marker` が付いている）なら無視する
   2. 記録の一時停止中なら無視する
   3. `NSPasteboard.PasteboardType.string` を読む。テキストがなければ無視する（画像やファイルは扱わない）
   4. [filtering.md](filtering.md) の判定で記録しないと決まったら無視する

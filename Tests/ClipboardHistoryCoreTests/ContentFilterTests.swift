@@ -1,5 +1,5 @@
 import Testing
-@testable import SafeClipyCore
+@testable import ClipboardHistoryCore
 
 @Suite struct ContentFilterTests {
     func evaluate(_ text: String, types: [String] = ["public.utf8-plain-text"], app: String? = "com.apple.TextEdit") -> ContentFilter.Decision {

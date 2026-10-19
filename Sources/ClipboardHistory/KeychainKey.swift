@@ -12,7 +12,7 @@ enum KeychainKey {
         }
     }
 
-    static let service = "SafeClipy history key"
+    static let service = "ClipboardHistory history key"
     static let account = "default"
 
     /// 鍵がなければ nil。アクセスを拒否された場合などは throw する。

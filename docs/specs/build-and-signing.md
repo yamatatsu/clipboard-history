@@ -6,16 +6,16 @@
 
 - `swift-tools-version:5.10`（Swift 6 の言語モードの厳しい並行性チェックを避けるため）。
 - `platforms: [.macOS(.v13)]`
-- ターゲットは、ライブラリの `SafeClipyCore`（UI に依存しないロジック）、実行ファイルの `SafeClipy`、テストの `SafeClipyCoreTests` の3つ。
+- ターゲットは、ライブラリの `ClipboardHistoryCore`（UI に依存しないロジック）、実行ファイルの `ClipboardHistory`、テストの `ClipboardHistoryCoreTests` の3つ。
 - `dependencies` は空にする。
 
 ## scripts/make-cert.sh
 
 最初の1回だけ実行する。
 
-1. ログインキーチェーンに `SafeClipy Local Signing` の証明書がすでにあれば、何もせずに終わる
+1. ログインキーチェーンに `ClipboardHistory Local Signing` の証明書がすでにあれば、何もせずに終わる
 2. `openssl` で、自己署名の証明書と秘密鍵を作る
-   - CN: `SafeClipy Local Signing`
+   - CN: `ClipboardHistory Local Signing`
    - keyUsage: digitalSignature（critical）、extendedKeyUsage: codeSigning（critical）
    - 有効期限: 10年
 3. p12 にまとめて、`security import` でログインキーチェーンに入れる（`-T /usr/bin/codesign` を付ける）
@@ -26,28 +26,28 @@
 ## scripts/build.sh
 
 ```
-./scripts/build.sh           # build/SafeClipy.app を作る
-./scripts/build.sh install   # 上に加えて ~/Applications/SafeClipy.app に置き換える
+./scripts/build.sh           # build/ClipboardHistory.app を作る
+./scripts/build.sh install   # 上に加えて ~/Applications/ClipboardHistory.app に置き換える
 ```
 
 1. `swift build -c release`
-2. `build/SafeClipy.app/Contents/` を作る
-   - `MacOS/SafeClipy`: ビルドしたバイナリ
+2. `build/ClipboardHistory.app/Contents/` を作る
+   - `MacOS/ClipboardHistory`: ビルドしたバイナリ
    - `Info.plist`: `Resources/Info.plist` をコピーする
-3. `codesign --force --options runtime --timestamp=none --sign "SafeClipy Local Signing" build/SafeClipy.app`
-4. `codesign --verify --strict --verbose=2 build/SafeClipy.app`。失敗したら終了コード 1 で終わる
+3. `codesign --force --options runtime --timestamp=none --sign "ClipboardHistory Local Signing" build/ClipboardHistory.app`
+4. `codesign --verify --strict --verbose=2 build/ClipboardHistory.app`。失敗したら終了コード 1 で終わる
 5. `install` のとき
-   - SafeClipy が起動していれば終了させる
-   - `~/Applications/SafeClipy.app` と置き換える
+   - ClipboardHistory が起動していれば終了させる
+   - `~/Applications/ClipboardHistory.app` と置き換える
    - 起動はしない（起動するかどうかは利用者が決める）
 
 ## Info.plist の主なキー
 
 | キー | 値 |
 |---|---|
-| `CFBundleIdentifier` | `local.safeclipy.SafeClipy` |
-| `CFBundleName` | `SafeClipy` |
-| `CFBundleExecutable` | `SafeClipy` |
+| `CFBundleIdentifier` | `local.clipboardhistory.ClipboardHistory` |
+| `CFBundleName` | `ClipboardHistory` |
+| `CFBundleExecutable` | `ClipboardHistory` |
 | `CFBundlePackageType` | `APPL` |
 | `CFBundleShortVersionString` | `0.1.0` |
 | `LSMinimumSystemVersion` | `13.0` |

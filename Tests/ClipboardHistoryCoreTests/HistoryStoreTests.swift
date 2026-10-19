@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import SafeClipyCore
+@testable import ClipboardHistoryCore
 
 @Suite struct HistoryStoreTests {
     let t0 = Date(timeIntervalSince1970: 1_000_000)

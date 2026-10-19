@@ -2,7 +2,7 @@
 # コード署名用の自己署名証明書をログインキーチェーンに作る（ADR-0003）。最初の1回だけ実行する。
 set -euo pipefail
 
-NAME="SafeClipy Local Signing"
+NAME="ClipboardHistory Local Signing"
 KEYCHAIN="$HOME/Library/Keychains/login.keychain-db"
 OPENSSL=/usr/bin/openssl   # macOS 付属の LibreSSL（security import と相性がよい）
 

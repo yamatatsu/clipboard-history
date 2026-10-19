@@ -1,6 +1,6 @@
 # ADR-0004: 履歴を CryptoKit（AES-GCM）で暗号化し、鍵を Keychain に置く
 
-- Status: Accepted
+- Status: Accepted（名前は [ADR-0007](0007-rename-to-clipboard-history.md) で変更）
 - Date: 2026-10-16
 
 ## Context

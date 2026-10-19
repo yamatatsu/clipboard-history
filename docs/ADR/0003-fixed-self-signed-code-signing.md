@@ -1,6 +1,6 @@
 # ADR-0003: 固定の自己署名証明書でコード署名する
 
-- Status: Accepted
+- Status: Accepted（名前は [ADR-0007](0007-rename-to-clipboard-history.md) で変更）
 - Date: 2026-10-16
 
 ## Context
